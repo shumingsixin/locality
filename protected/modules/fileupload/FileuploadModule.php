@@ -7,11 +7,11 @@ class FileuploadModule extends CWebModule {
         // you may place code here to customize the module or the application
         // import the module-level models and components
         $this->setImport(array(
-            'fileUploadModel.models.*',
-            'fileUploadModel.models.base.*',
-            'fileUploadModel.models.file.*',
-            'fileUploadModel.components.*',
-            'fileUploadModel.apiservices.*',
+            'fileupload.models.*',
+            'fileupload.models.base.*',
+            'fileupload.models.file.*',
+            'fileupload.components.*',
+            'fileupload.apiservices.*',
         ));
     }
 
