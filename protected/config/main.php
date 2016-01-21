@@ -7,7 +7,7 @@
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => '名医主刀',
-    'defaultController' => 'site',
+    'defaultController' => 'api',
     // preloading 'log' component
     'preload' => array('log'),
     // application default language.
@@ -134,33 +134,13 @@ return array(
             'caseSensitive' => false,
             'showScriptName' => false,
             'rules' => array(
-                // api url.
-                //array('api/payment', 'pattern'=>'api/<action:\w+>', 'verb'=>'POST'),
-                //array('api/', 'pattern'=>'api/payment/doPay', 'verb'=>'POST'),
-                // array('api/returnPay', 'pattern'=>'api/<type:\w+>', 'verb'=>'GET'),                
-                array('api/list', 'pattern' => 'api/<model:\w+>', 'verb' => 'GET'),
-                //   array('api/view', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'GET'),
+                // api url.                
+                array('api/list', 'pattern' => 'api/<model:\w+>', 'verb' => 'GET'),                
                 array('api/view', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'GET'),
                 array('api/update', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'PUT'),
                 array('api/delete', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'DELETE'),
                 array('api/create', 'pattern' => 'api/<model:\w+>', 'verb' => 'POST'),
-                //'http://api.mingyizhudao.com/<action:(contactus)>' => 'mobile/app/<action>',
-                'http://api.mingyizhudao.com/<action:\w+>' => 'mobile/<action>',
-                'http://api.mingyizhudao.com' => 'mobile',
-                //'<action:(contactus)>' => 'site/<action>',
-                // mobile module url rewrite.
-                'http://m.mingyizhudao.com/<action:(contactus)>' => 'mobile/app/enquiry',
-                'http://m.mingyizhudao.com/<controller:\w+>' => 'mobile/<controller>',
-                'http://m.mingyizhudao.com' => 'mobile',
-                //@TEMP url for doctor app. - 2015-09-27 - QP
-                'http://mingyizhudao.com/mobiledoctor/home' => '/mobile/app/index',
-                '<action:(contactus|enquiry)>' => 'site/<action>',
-                //Temp, to be removed
-                //   'overseas/elizabeth' => 'overseas/view',
-                //   'hospital/tiantanpuhua' => 'hospital/view',
-                'event/view/<page:\w+>' => 'event/view',
-                '<view:(aboutus|faq|terms|media|rules|joinus|news|bigevents|zhitongche|refundAgreement|mingyizhuyi)>' => 'site/page',
-                '<controller:(huizhen|marketing)>/<id:\w+>' => '<controller>/view',
+
                 '<controller:\w+>/<action:index>' => '<controller>/index',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -240,23 +220,8 @@ return array(
     // application-level parameters that can be accessed
     // using Yii::app()->params['paramName']
     'params' => array(
-        // this is used in contact page
-        'admin' => 'superbeta',
-        'adminPassword' => '9be4e9c1e40a1952d3ad23cdb9343cedce6814d8e2b031d9d775ba58a02108b0',
-        'adminEmail' => 'fainqin@foxmail.com',
-        //'contactEmail' => 'contactus@mingyihz.com',
-        'contactEmail' => 'clark.zhang@mingyizhudao.com',
-        // 'registerBaiduScript' => true,
-        'medicalRecordFilePath' => 'upload/mr',
-        'bookingFilePath' => 'upload/booking',
-        "doctorFilePath" => "upload/doctor/cert",
-        "patientMRFilePath" => "upload/patient/mr",
-        // 'doctorAvatar' => 'upload/doctor/avatar',
-        'baseUrl' => 'http://mingyizhudao.com',
-        'baseUrlMobile' => 'http://m.mingyizhudao.com',
-        'baseUrlApi' => 'http://api.mingyizhudao.com',
-        //'csadminEmail' => 'csadmin@mingyizhudao.com',
-        'csadminEmail' => 'clark.zhang@mingyizhudao.com',
-    ),
-    'theme' => 'v5',
+        // this is used in contact page        
+        'mrFilePath' => 'upload/mr',
+        "doctorCertFilePath" => "upload/doctorcert",               
+    ),   
 );
