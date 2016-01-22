@@ -1,0 +1,170 @@
+2016/01/21 09:06:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+---
+2016/01/21 09:07:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+---
+2016/01/21 09:07:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/file.myzd.com/
+---
+2016/01/21 09:08:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/
+---
+2016/01/21 09:08:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/
+---
+2016/01/21 09:10:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/
+---
+2016/01/21 09:10:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/
+---
+2016/01/21 09:24:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/
+---
+2016/01/21 09:24:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/
+---
+2016/01/21 09:24:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/
+---
+2016/01/21 09:24:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/
+---
+2016/01/21 09:27:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+---
+2016/01/22 01:59:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+---
+2016/01/22 03:11:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+---
+2016/01/22 03:21:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+---
+2016/01/22 05:41:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+HTTP_REFERER=http://127.0.0.1/
+---
