@@ -168,3 +168,81 @@ Stack trace:
 REQUEST_URI=/file.myzd.com/
 HTTP_REFERER=http://127.0.0.1/
 ---
+2016/01/22 06:15:28 [error] [php] Undefined index: tableName (D:\wamp\www\file.myzd.com\protected\controllers\ApiController.php:40)
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\wamp\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#3 D:\wamp\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 D:\wamp\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#5 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\wamp\www\file.myzd.com\index.php(13): CWebApplication->run()
+REQUEST_URI=/file.myzd.com/api/uploadtoken
+in D:\wamp\www\file.myzd.com\protected\controllers\ApiController.php (40)
+in D:\wamp\www\file.myzd.com\index.php (13)
+2016/01/22 06:15:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/api/
+---
+2016/01/22 06:15:38 [error] [php] Undefined index: tableName (D:\wamp\www\file.myzd.com\protected\controllers\ApiController.php:40)
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 D:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\wamp\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#3 D:\wamp\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 D:\wamp\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#5 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#7 D:\wamp\www\file.myzd.com\index.php(13): CWebApplication->run()
+REQUEST_URI=/file.myzd.com/api/uploadtoken
+in D:\wamp\www\file.myzd.com\protected\controllers\ApiController.php (40)
+in D:\wamp\www\file.myzd.com\index.php (13)
+2016/01/22 07:28:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "tz.php"。' in D:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('tz.php')
+#1 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/file.myzd.com/tz.php
+---
+2016/01/22 07:28:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "tz.php"。' in D:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('tz.php')
+#1 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/file.myzd.com/tz.php
+---
+2016/01/22 07:28:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "tz.php"。' in D:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('tz.php')
+#1 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/file.myzd.com/tz.php
+---
+2016/01/22 07:28:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "tz.php"。' in D:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('tz.php')
+#1 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/file.myzd.com/tz.php
+---
+2016/01/22 07:28:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "" 动作.' in D:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('')
+#1 D:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#2 D:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#3 D:\wamp\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\file.myzd.com\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/file.myzd.com/
+---

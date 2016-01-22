@@ -24,6 +24,11 @@ class ApiController extends Controller {
     public function init() {
         //header('Access-Control-Allow-Origin:http://m.mingyizhudao.com'); 
         header('Access-Control-Allow-Origin:http://mingyizhudao.com');    // Cross-domain access.
+        header('Access-Control-Allow-Origin:http://www.mingyizhudao.com');    // Cross-domain access.
+        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com'); 
+        header('Access-Control-Allow-Origin:http://md.mingyizhudao.com');
+        header('Access-Control-Allow-Origin:http://api.mingyizhudao.com'); 
+        header('Access-Control-Allow-Origin:http://static.mingyizhudao.com'); 
         header('Access-Control-Allow-Credentials:true');      // 允许携带 用户认证凭据（也就是允许客户端发送的请求携带Cookie）
         return parent::init();
     }
