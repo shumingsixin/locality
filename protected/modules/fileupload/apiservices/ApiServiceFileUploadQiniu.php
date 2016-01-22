@@ -1,10 +1,7 @@
 <?php
 
-//require_once dirname(__FILE__) . '/../sdk/vendor/autoload.php';
-//require_once dirname(__FILE__) . '/../sdk/vendor/config.php';
-Yii::import('application.modules.fileUploadModel.sdk.vendor.autoload');
-Yii::import('application.modules.fileUploadModel.sdk.vendor.config');
-
+require_once dirname(__FILE__) . '/../sdk/vendor/autoload.php';
+require_once dirname(__FILE__) . '/../sdk/vendor/config.php';
 // 引入鉴权类
 use Qiniu\Auth;
 //引入上传类
