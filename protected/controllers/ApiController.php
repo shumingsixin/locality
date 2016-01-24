@@ -168,8 +168,14 @@ class ApiController extends Controller {
         }
         $username = $values['username'];
         $token = $values['token'];
+        $tableName = $values['tableName'];
         $authMgr = new AuthManager();
-        $authUserIdentity = $authMgr->authenticateUserByToken($username, $token);
+        if ($tableName == 'booking_file') {
+            $authUserIdentity = $authMgr->authenticateUserByToken($username, $token);
+        } else {
+            $authUserIdentity = $authMgr->authenticateDoctorByToken($username, $token);
+        }
+
         if (is_null($authUserIdentity) || $authUserIdentity->isAuthenticated === false) {
             if ($this->getApiVersionFromRequest() >= 4) {
                 $this->renderJsonOutput(array('status' => EApiViewService::RESPONSE_NO, 'errorCode' => ErrorList::BAD_REQUEST, 'errorMsg' => '用户名或token不正确'));
