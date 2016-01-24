@@ -135,6 +135,8 @@ class FileUploadManager {
         }
         $data->absFileUrl = $absFileUrl;
         $data->thumbnailUrl = $thumbnailUrl;
+        $data->uid = $fileUploadModel->getUID();
+        $data->id = $fileUploadModel->getId();
         return $data;
     }
 

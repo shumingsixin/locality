@@ -118,6 +118,13 @@ abstract class FileUploadModel extends EActiveRecord {
     }
 
     /**
+     * 查询未存于七牛的文件
+     */
+    public function loadAllHasNotRemote($options = null) {
+        return $this->getAllByAttributes(array('has_remote' => self::HASNOT_REMOTE), null, $options);
+    }
+
+    /**
      * is_writable(): open_basedir restriction in effect. File(/tmp) is not within the allowed path(s): (/var/php-fpm/5.4/superbeta/tmp:/virtualhost/superbeta
      */
     public function saveModel() {

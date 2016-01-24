@@ -24,8 +24,6 @@
  * The followings are the available model relations:
  * @property User $user
  */
-Yii::import('application.modules.fileUploadModel.models.base.FileUploadModel');
-
 class UserDoctorCert extends FileUploadModel {
 
     public $file_upload_field = 'file'; // $_FILE['file'].   
@@ -133,6 +131,10 @@ class UserDoctorCert extends FileUploadModel {
                 return $this->save();
             } catch (CException $e) {
                 $this->addError('file', $e->getMessage());
+                //log记录
+                $fileArr = array('tableName' => $this->tableName(), 'rowId' => NULL, 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__, 'subject' => '文件出错', 'message' => $e->getMessage());
+                $filelog = new FileuploadLog();
+                $filelog->careateModel($fileArr);
                 return false;
             }
         } else {
@@ -147,7 +149,7 @@ class UserDoctorCert extends FileUploadModel {
 
     //Overwrites parent::getFileUploadRootPath().
     public function getFileUploadRootPath() {
-        return Yii::app()->params['doctorFilePath'];
+        return Yii::app()->params['doctorCertFilePath'];
     }
 
     public function getFileSystemUploadPath($folderName = null) {

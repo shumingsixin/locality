@@ -25,10 +25,10 @@ class ApiController extends Controller {
         //header('Access-Control-Allow-Origin:http://m.mingyizhudao.com'); 
         header('Access-Control-Allow-Origin:http://mingyizhudao.com');    // Cross-domain access.
         header('Access-Control-Allow-Origin:http://www.mingyizhudao.com');    // Cross-domain access.
-        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com'); 
+        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
         header('Access-Control-Allow-Origin:http://md.mingyizhudao.com');
-        header('Access-Control-Allow-Origin:http://api.mingyizhudao.com'); 
-        header('Access-Control-Allow-Origin:http://static.mingyizhudao.com'); 
+        header('Access-Control-Allow-Origin:http://api.mingyizhudao.com');
+        header('Access-Control-Allow-Origin:http://static.mingyizhudao.com');
         header('Access-Control-Allow-Credentials:true');      // 允许携带 用户认证凭据（也就是允许客户端发送的请求携带Cookie）
         return parent::init();
     }
@@ -41,14 +41,16 @@ class ApiController extends Controller {
                 $apiService = new ApiViewUploadToken($tableName);
                 $output = $apiService->loadApiViewData();
                 break;
-            case 'appfileurl'://获取文件链接
+            case 'fileurl'://获取文件链接 兼容app和其他
                 $values = $_GET;
-                $user = $this->userLoginRequired($values);
-                $values['userId'] = $user->getId();
+                if (isset($values['userId']) === false) {
+                    $user = $this->userLoginRequired($values);
+                    $values['userId'] = $user->getId();
+                }
                 $apiService = new ApiViewFileUrl($values);
                 $output = $apiService->loadApiViewData();
                 break;
-            case 'appimage':
+            case 'image'://本地文件加载
                 $tableName = $_GET['tableName'];
                 $uid = $_GET['uid'];
                 $type = $_GET['type'];
@@ -57,7 +59,20 @@ class ApiController extends Controller {
                 $this->renderImageOutput($url);
                 exit();
                 break;
-
+            case 'uploadtoqiniu'://定时任务调用接口
+                $tableName = $_GET['tableName'];
+                $fileMgr = new FileManager();
+                $fileMgr->filesUploadQiniu($tableName);
+                break;
+            case 'deletefile':
+                $values = $_GET;
+                if (isset($values['userId']) === false) {
+                    $user = $this->userLoginRequired($values);
+                    $values['userId'] = $user->getId();
+                }
+                $fileMgr = new FileManager();
+                $output = $fileMgr->deleteFile($values);
+                break;
             default:
                 // Model not implemented error
                 //$this->_sendResponse(501, sprintf('Error: Mode <b>list</b> is not implemented for model <b>%s</b>', $model));
@@ -103,6 +118,38 @@ class ApiController extends Controller {
                 $appFile['userId'] = $user->getId();
                 $apiService = new ApiViewSaveAppFile($appFile);
                 $output = $apiService->loadApiViewData();
+                break;
+            case 'uploaddoctorcert'://保存md上传的医生证明
+                $values = $_POST['doctor'];
+                if (isset($values['id']) === false) {
+                    $user = $this->userLoginRequired($values);
+                    $values['id'] = $user->getId();
+                }
+                $apiService = new ApiViewDoctorCert($values);
+                $output = $apiService->loadApiViewData();
+                // android 插件
+                if (isset($_POST['plugin'])) {
+                    echo CJSON::encode($output);
+                    Yii::app()->end(200, true); //结束 返回200
+                }
+                break;
+            case 'uploadparientmr'://病人病历
+                $values = $_POST['patient'];
+                $apiService = new ApiViewPatientMr($values);
+                $output = $apiService->loadApiViewData();
+                if (isset($_POST['plugin'])) {
+                    echo CJSON::encode($output);
+                    Yii::app()->end(200, true); //结束 返回200
+                }
+                break;
+            case 'uploadbookingfile'://预约的病历
+                $values = $_POST['booking'];
+                $apiService = new ApiViewBookingFile($values);
+                $output = $apiService->loadApiViewData();
+                if (isset($_POST['plugin'])) {
+                    echo CJSON::encode($output);
+                    Yii::app()->end(200, true); //结束 返回200
+                }
                 break;
             default:
                 $this->_sendResponse(501, sprintf('Error: Invalid request', $model));

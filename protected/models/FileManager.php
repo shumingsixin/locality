@@ -71,4 +71,41 @@ class FileManager {
         return $url;
     }
 
+    //定时任务 文件上传至七牛
+    public function filesUploadQiniu($tableName) {
+        $models = array();
+        $options = array('limit' => 100, 'order' => 't.date_updated DESC');
+        switch ($tableName) {
+            case "user_doctor_cert"://医生证明
+                $models = UserDoctorCert::model()->loadAllHasNotRemote($options);
+                break;
+            case "patient_mr_file"://病人病历--医生端
+                $models = PatientMRFile::model()->loadAllHasNotRemote($options);
+                break;
+            case "booking_file"://病人病历 --病人端
+                $models = BookingFile::model()->loadAllHasNotRemote($options);
+                break;
+        }
+        $uploadMgr = new FileUploadManager();
+        $uploadMgr->fileUpdateCloud($models, $tableName);
+    }
+
+    //文件删除
+    public function deleteFile($values) {
+        $tableName = $values['tableName'];
+        $id = $values['id'];
+        $userId = $values['userId'];
+        switch ($tableName) {
+            case "user_doctor_cert"://医生证明
+                $userMgr = new UserManager();
+                $output = $userMgr->delectDoctorCertByIdAndUserId($id, $userId);
+                break;
+            case "patient_mr_file"://病人病历--医生端
+                $userMgr = new UserManager();
+                $output = $userMgr->delectPatientMRFileByIdAndCreatorId($id, $userId);
+                break;
+        }
+        return $output;
+    }
+
 }

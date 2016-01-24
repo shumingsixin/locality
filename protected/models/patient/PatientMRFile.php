@@ -23,8 +23,6 @@
  * @property string $date_updated
  * @property string $date_deleted
  */
-Yii::import('application.modules.fileUploadModel.models.base.FileUploadModel');
-
 class PatientMRFile extends FileUploadModel {
 
     public $file_upload_field = 'file'; // $_FILE['file'].   
@@ -137,6 +135,10 @@ class PatientMRFile extends FileUploadModel {
                 return $this->save();
             } catch (CException $e) {
                 $this->addError('file', $e->getMessage());
+                //log记录
+                $fileArr = array('tableName' => $this->tableName(), 'rowId' => NULL, 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__, 'subject' => '文件出错', 'message' => $e->getMessage());
+                $filelog = new FileuploadLog();
+                $filelog->careateModel($fileArr);
                 return false;
             }
         } else {
@@ -146,7 +148,7 @@ class PatientMRFile extends FileUploadModel {
 
     //Overwrites parent::getFileUploadRootPath().
     public function getFileUploadRootPath() {
-        return Yii::app()->params['patientMRFilePath'];
+        return Yii::app()->params['mrFilePath'];
     }
 
     public function getFileSystemUploadPath($folderName = null) {
