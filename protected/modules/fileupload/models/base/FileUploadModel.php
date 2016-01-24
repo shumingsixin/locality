@@ -114,7 +114,7 @@ abstract class FileUploadModel extends EActiveRecord {
         $this->setFileExtension($appFile['type']);
         $this->setHasRemote($hasRemote);
         $this->setRemoteDomain($appFile['remoteDomain']);
-        $this->setRemoteFileKey($appFile['reomteKey']);
+        $this->setRemoteFileKey($appFile['remoteKey']);
     }
 
     /**
