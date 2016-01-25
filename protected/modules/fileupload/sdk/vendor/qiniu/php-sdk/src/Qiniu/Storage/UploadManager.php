@@ -64,7 +64,7 @@ final class UploadManager {
     public function putFile(
     $upToken, $key, $filePath, $params = null, $mime = 'application/octet-stream', $checkCrc = false
     ) {
-        $file = file_get_contents($filePath); //fopen($filePath, 'rb');
+        $file = @file_get_contents($filePath); //fopen($filePath, 'rb');
         if ($file === false) {
             throw new \Exception("file can not open", 1);
         }

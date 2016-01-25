@@ -50,7 +50,9 @@ class FileUploadManager {
      */
     public function fileUpdateCloud($files, $tableName = '') {
 
+
         $bucket = Config::getBucketByTableName($tableName);
+        $remoteDomain = Config::getDomainByBucket($bucket);
         // 要上传的空间
         $auth = new Auth($this->accessKey, $this->secretKey);
         //查询为存于云盘的文件
@@ -84,8 +86,8 @@ class FileUploadManager {
                     //文件上传云盘
                     list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
                     if ($err == null) {
-                        $v->setRemoteDomain($this->domain);
-                        $v->setHasRemote(FileTest::HAS_REMOTE);
+                        $v->setRemoteDomain($remoteDomain);
+                        $v->setHasRemote(FileUploadModel::HAS_REMOTE);
                         $v->setRemoteFileKey($key);
                         //上传成功 数据更新
                         $v->update();
