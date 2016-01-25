@@ -22,8 +22,7 @@ class ApiController extends Controller {
     }
 
     public function init() {
-//        header('Access-Control-Allow-Origin:*');
-          header('Access-Control-Allow-Origin:http://m.mingyizhudao.com'); 
+        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
         header('Access-Control-Allow-Origin:http://mingyizhudao.com');    // Cross-domain access.
         header('Access-Control-Allow-Origin:http://www.mingyizhudao.com');    // Cross-domain access.
         header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
