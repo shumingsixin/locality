@@ -40,8 +40,12 @@ class FileManager {
                 break;
             case "booking_file"://病人病历 --病人端
                 $bookingId = $values['bookingId'];
-                $userId = $values['userId'];
-                $models = BookingFile::model()->getAllByBookingIdAndUserId($bookingId, $userId);
+                if (isset($values['userId'])) {
+                    $userId = $values['userId'];
+                    $models = BookingFile::model()->getAllByBookingIdAndUserId($bookingId, $userId);
+                } else {
+                    $models = BookingFile::model()->getAllByBookingId($bookingId);
+                }
                 break;
         }
         return $models;
