@@ -82,7 +82,7 @@ class FileUploadManager {
                     //文件开始上传 log记录
                     $fileArr = array('tableName' => $tableName, 'rowId' => $v->getId(), 'level' => CLogger::LEVEL_INFO, 'category' => __METHOD__, 'subject' => '文件上传七牛', 'message' => $key . '文件开始上传到七牛!');
                     $filelog = new FileuploadLog();
-                    $filelog->careateModel($fileArr);
+                    $filelog->createModel($fileArr);
                     //文件上传云盘
                     list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
                     if ($err == null) {
@@ -97,24 +97,29 @@ class FileUploadManager {
                         //上传失败 
                         $fileArr = array('tableName' => $tableName, 'rowId' => $v->getId(), 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__ . $response->statusCode, 'subject' => '文件上传七牛', 'message' => $key . '文件上传到七牛出错!错误信息:' . $response->error);
                         $filelog = new FileuploadLog();
-                        $filelog->careateModel($fileArr);
+                        $filelog->createModel($fileArr);
                     }
                 } catch (CDbException $cdbex) {
                     //数据库错误
                     $fileArr = array('tableName' => $tableName, 'rowId' => $v->getId(), 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__ . $cdbex->getCode(), 'subject' => '数据库更新', 'message' => $cdbex->getMessage());
                     $filelog = new FileuploadLog();
-                    $filelog->careateModel($fileArr);
+                    $filelog->createModel($fileArr);
                 } catch (CException $cex) {
                     $fileArr = array('tableName' => $tableName, 'rowId' => $v->getId(), 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__ . $cex->getCode(), 'subject' => '文件上传七牛', 'message' => $cex->getMessage());
                     $filelog = new FileuploadLog();
-                    $filelog->careateModel($fileArr);
+                    $filelog->createModel($fileArr);
+                }
+                catch (Exception $ex) {
+                    $fileArr = array('tableName' => $tableName, 'rowId' => $v->getId(), 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__ . $cex->getCode(), 'subject' => '文件上传七牛', 'message' => $ex->getMessage());
+                    $filelog = new FileuploadLog();
+                    $filelog->createModel($fileArr);
                 }
             }
         }
         $message = '本次任务查询出的文件数:' . $fileDbCount . ', 上传七牛成功的文件数:' . $fileQnCount;
         $fileArr = array('tableName' => $tableName, 'rowId' => null, 'level' => CLogger::LEVEL_INFO, 'category' => __METHOD__, 'subject' => '文件上传七牛定时任务', 'message' => $message);
         $filelog = new FileuploadLog();
-        $filelog->careateModel($fileArr);
+        $filelog->createModel($fileArr);
     }
 
     /**

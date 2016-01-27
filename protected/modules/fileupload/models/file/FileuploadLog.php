@@ -120,7 +120,7 @@ class FileuploadLog extends EActiveRecord {
      * @param array $file
      * @return type
      */
-    public function careateModel(array $file) {
+    public function createModel(array $file) {
         $this->table_name = $file['tableName'];
         $this->row_id = $file['rowId'];
         $this->level = $file['level'];

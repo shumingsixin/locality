@@ -7,6 +7,9 @@ class ApiController extends Controller {
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
      */
     Const APPLICATION_ID = 'ASCCPE';
+    const TYPE_DOCTOR = 'user_doctor_cert';
+    const TYPE_PATIENT = 'patient_mr_file';
+    const TYPE_BOOKING = 'booking_file';
 
     /**
      * Default response format
@@ -22,14 +25,15 @@ class ApiController extends Controller {
     }
 
     public function init() {
-        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
-        header('Access-Control-Allow-Origin:http://mingyizhudao.com');    // Cross-domain access.
-        header('Access-Control-Allow-Origin:http://www.mingyizhudao.com');    // Cross-domain access.
-        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
-        header('Access-Control-Allow-Origin:http://md.mingyizhudao.com');
-        header('Access-Control-Allow-Origin:http://api.mingyizhudao.com');
-        header('Access-Control-Allow-Origin:http://static.mingyizhudao.com');
-        header('Access-Control-Allow-Origin:http://file.mingyizhudao.com');
+        header('Access-Control-Allow-Origin:*');
+//        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
+//        header('Access-Control-Allow-Origin:http://mingyizhudao.com');    // Cross-domain access.
+//        header('Access-Control-Allow-Origin:http://www.mingyizhudao.com');    // Cross-domain access.
+//        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
+//        header('Access-Control-Allow-Origin:http://md.mingyizhudao.com');
+//        header('Access-Control-Allow-Origin:http://api.mingyizhudao.com');
+//        header('Access-Control-Allow-Origin:http://static.mingyizhudao.com');
+//        header('Access-Control-Allow-Origin:http://file.mingyizhudao.com');
         header('Access-Control-Allow-Credentials:true');      // 允许携带 用户认证凭据（也就是允许客户端发送的请求携带Cookie）
         return parent::init();
     }
@@ -37,13 +41,24 @@ class ApiController extends Controller {
     // Actions
     public function actionList($model) {
         switch ($model) {
-            case 'uploadtoken'://获取上传权限
-                $tableName = $_GET['tableName'];
+            case 'tokendrcert'://获取医生证明上传权限
+                $tableName = self::TYPE_DOCTOR;
                 $apiService = new ApiViewUploadToken($tableName);
                 $output = $apiService->loadApiViewData();
                 break;
-            case 'fileurl'://获取文件链接 兼容app和其他
+            case 'tokenpatientmr'://获取病人病历上传权限
+                $tableName = self::TYPE_PATIENT;
+                $apiService = new ApiViewUploadToken($tableName);
+                $output = $apiService->loadApiViewData();
+                break;
+            case 'tokenbookingmr'://获取预约病历上传权限
+                $tableName = self::TYPE_BOOKING;
+                $apiService = new ApiViewUploadToken($tableName);
+                $output = $apiService->loadApiViewData();
+                break;
+            case 'loaddrcert'://获取医生证明文件链接 
                 $values = $_GET;
+                $values['tableName'] = self::TYPE_DOCTOR;
                 if (isset($values['userId']) === false) {
                     $user = $this->userLoginRequired($values);
                     $values['userId'] = $user->getId();
@@ -51,8 +66,28 @@ class ApiController extends Controller {
                 $apiService = new ApiViewFileUrl($values);
                 $output = $apiService->loadApiViewData();
                 break;
-            case 'image'://本地文件加载
-                $tableName = $_GET['tableName'];
+            case 'loadpatientmr'://获取病人病历文件链接
+                $values = $_GET;
+                $values['tableName'] = self::TYPE_PATIENT;
+                if (isset($values['userId']) === false) {
+                    $user = $this->userLoginRequired($values);
+                    $values['userId'] = $user->getId();
+                }
+                $apiService = new ApiViewFileUrl($values);
+                $output = $apiService->loadApiViewData();
+                break;
+            case 'loadbookingmr'://获取预约病历链接 
+                $values = $_GET;
+                $values['tableName'] = self::TYPE_BOOKING;
+                if (isset($values['userId']) === false) {
+                    $user = $this->userLoginRequired($values);
+                    $values['userId'] = $user->getId();
+                }
+                $apiService = new ApiViewFileUrl($values);
+                $output = $apiService->loadApiViewData();
+                break;
+            case 'imagedrcert'://加载医生证明
+                $tableName = self::TYPE_DOCTOR;
                 $uid = $_GET['uid'];
                 $type = $_GET['type'];
                 $fileMgr = new FileManager();
@@ -60,13 +95,52 @@ class ApiController extends Controller {
                 $this->renderImageOutput($url);
                 exit();
                 break;
-            case 'uploadtoqiniu'://定时任务调用接口
-                $tableName = $_GET['tableName'];
+            case 'imagepatientmr'://加载病人病历
+                $tableName = self::TYPE_PATIENT;
+                $uid = $_GET['uid'];
+                $type = $_GET['type'];
+                $fileMgr = new FileManager();
+                $url = $fileMgr->getFileUrl($tableName, $uid, $type);
+                $this->renderImageOutput($url);
+                exit();
+                break;
+            case 'imagebookingmr'://加载预约病历
+                $tableName = self::TYPE_BOOKING;
+                $uid = $_GET['uid'];
+                $type = $_GET['type'];
+                $fileMgr = new FileManager();
+                $url = $fileMgr->getFileUrl($tableName, $uid, $type);
+                $this->renderImageOutput($url);
+                exit();
+                break;
+            case 'qiniudrcert'://定时任务调用接口上传
+                $tableName = self::TYPE_DOCTOR;
                 $fileMgr = new FileManager();
                 $fileMgr->filesUploadQiniu($tableName);
                 break;
-            case 'deletefile':
+            case 'qiniupatientmr'://定时任务调用接口
+                $tableName = self::TYPE_PATIENT;
+                $fileMgr = new FileManager();
+                $fileMgr->filesUploadQiniu($tableName);
+                break;
+            case 'qiniubooking'://定时任务调用接口
+                $tableName = self::TYPE_DOCTOR;
+                $fileMgr = new FileManager();
+                $fileMgr->filesUploadQiniu($tableName);
+                break;
+            case 'deletedrcert'://删除医生证明
                 $values = $_GET;
+                $values['tableName'] = self::TYPE_DOCTOR;
+                if (isset($values['userId']) === false) {
+                    $user = $this->userLoginRequired($values);
+                    $values['userId'] = $user->getId();
+                }
+                $fileMgr = new FileManager();
+                $output = $fileMgr->deleteFile($values);
+                break;
+            case 'deletepatientmr'://删除病人病历
+                $values = $_GET;
+                $values['tableName'] = self::TYPE_PATIENT;
                 if (isset($values['userId']) === false) {
                     $user = $this->userLoginRequired($values);
                     $values['userId'] = $user->getId();
@@ -113,8 +187,25 @@ class ApiController extends Controller {
         switch ($get['model']) {
             // Get an instance of the respective model
             //@TODO: delete this.
-            case 'saveappfile'://保存app上传七牛的各类文件数据
+            case 'savedrcert'://保存app上传七牛的各类文件数据
                 $appFile = $_POST['appFile'];
+                $appFile['tableName'] = self::TYPE_DOCTOR;
+                $user = $this->userLoginRequired($appFile);
+                $appFile['userId'] = $user->getId();
+                $apiService = new ApiViewSaveAppFile($appFile);
+                $output = $apiService->loadApiViewData();
+                break;
+            case 'savepatientmr'://保存app上传七牛的各类文件数据
+                $appFile = $_POST['appFile'];
+                $appFile['tableName'] = self::TYPE_PATIENT;
+                $user = $this->userLoginRequired($appFile);
+                $appFile['userId'] = $user->getId();
+                $apiService = new ApiViewSaveAppFile($appFile);
+                $output = $apiService->loadApiViewData();
+                break;
+            case 'savebookingmr'://保存app上传七牛的各类文件数据
+                $appFile = $_POST['appFile'];
+                $appFile['tableName'] = self::TYPE_BOOKING;
                 $user = $this->userLoginRequired($appFile);
                 $appFile['userId'] = $user->getId();
                 $apiService = new ApiViewSaveAppFile($appFile);

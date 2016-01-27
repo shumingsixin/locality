@@ -138,7 +138,7 @@ class PatientMRFile extends FileUploadModel {
                 //log记录
                 $fileArr = array('tableName' => $this->tableName(), 'rowId' => NULL, 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__, 'subject' => '文件出错', 'message' => $e->getMessage());
                 $filelog = new FileuploadLog();
-                $filelog->careateModel($fileArr);
+                $filelog->createModel($fileArr);
                 return false;
             }
         } else {
