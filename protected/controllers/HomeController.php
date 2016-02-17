@@ -15,9 +15,7 @@ class HomeController extends Controller {
     /**
      * This is the action to handle external exceptions.
      */
-    public function actionError() {
-
-        $this->headerUTF8();
+    public function actionError() {     
         $error=Yii::app()->errorHandler->error;
         $this->renderJsonOutput($error);
        /*
