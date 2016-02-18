@@ -26,18 +26,18 @@ class ApiController extends Controller {
 
     public function init() {
         header('Access-Control-Allow-Origin:*');
-//        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
-//        header('Access-Control-Allow-Origin:http://mingyizhudao.com');    // Cross-domain access.
-//        header('Access-Control-Allow-Origin:http://www.mingyizhudao.com');    // Cross-domain access.
-//        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
-//        header('Access-Control-Allow-Origin:http://md.mingyizhudao.com');
-//        header('Access-Control-Allow-Origin:http://api.mingyizhudao.com');
-//        header('Access-Control-Allow-Origin:http://static.mingyizhudao.com');
-//        header('Access-Control-Allow-Origin:http://file.mingyizhudao.com');
+        header('Access-Control-Allow-Origin:http://192.168.31.169');
+        header('Access-Control-Allow-Origin:http://mingyizhudao.com');    // Cross-domain access.
+        header('Access-Control-Allow-Origin:http://www.mingyizhudao.com');    // Cross-domain access.
+        header('Access-Control-Allow-Origin:http://m.mingyizhudao.com');
+        header('Access-Control-Allow-Origin:http://md.mingyizhudao.com');
+        header('Access-Control-Allow-Origin:http://api.mingyizhudao.com');
+        header('Access-Control-Allow-Origin:http://static.mingyizhudao.com');
+        header('Access-Control-Allow-Origin:http://file.mingyizhudao.com');
         header('Access-Control-Allow-Credentials:true');      // 允许携带 用户认证凭据（也就是允许客户端发送的请求携带Cookie）
         return parent::init();
     }
-    
+
     // Actions
     public function actionList($model) {
         switch ($model) {
@@ -124,7 +124,7 @@ class ApiController extends Controller {
                 $fileMgr->filesUploadQiniu($tableName);
                 break;
             case 'qiniubooking'://定时任务调用接口
-                $tableName = self::TYPE_DOCTOR;
+                $tableName = self::TYPE_BOOKING;
                 $fileMgr = new FileManager();
                 $fileMgr->filesUploadQiniu($tableName);
                 break;
