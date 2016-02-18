@@ -108,8 +108,7 @@ class FileUploadManager {
                     $fileArr = array('tableName' => $tableName, 'rowId' => $v->getId(), 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__ . $cex->getCode(), 'subject' => '文件上传七牛', 'message' => $cex->getMessage());
                     $filelog = new FileuploadLog();
                     $filelog->createModel($fileArr);
-                }
-                catch (Exception $ex) {
+                } catch (Exception $ex) {
                     $fileArr = array('tableName' => $tableName, 'rowId' => $v->getId(), 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__ . $cex->getCode(), 'subject' => '文件上传七牛', 'message' => $ex->getMessage());
                     $filelog = new FileuploadLog();
                     $filelog->createModel($fileArr);
@@ -137,8 +136,8 @@ class FileUploadManager {
             $absFileUrl = $auth->privateDownloadUrl($baseUrl, $this->urlTime);
             $thumbnailUrl = $absFileUrl . '&imageView2/2/w/90/h/127';
         } else {
-            $absFileUrl = Yii::app()->createAbsoluteUrl($actionUrl, array('tableName' => $fileUploadModel->tableName(), 'uid' => $fileUploadModel->getUID(), 'type' => 'absFile'));
-            $thumbnailUrl = Yii::app()->createAbsoluteUrl($actionUrl, array('tableName' => $fileUploadModel->tableName(), 'uid' => $fileUploadModel->getUID(), 'type' => 'thumbnail'));
+            $absFileUrl = Yii::app()->createAbsoluteUrl($actionUrl, array('uid' => $fileUploadModel->getUID(), 'type' => 'absFile'));
+            $thumbnailUrl = Yii::app()->createAbsoluteUrl($actionUrl, array('uid' => $fileUploadModel->getUID(), 'type' => 'thumbnail'));
         }
         $data->absFileUrl = $absFileUrl;
         $data->thumbnailUrl = $thumbnailUrl;

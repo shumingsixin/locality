@@ -39,7 +39,20 @@ class ApiViewFileUrl extends EApiViewService {
     }
 
     private function setFiles($models) {
-        $actionUrl = 'api/image';
+        $tableName = $this->values['tableName'];
+        $actionUrl = '';
+        switch ($tableName) {
+            case "user_doctor_cert"://医生证明
+                $actionUrl = 'api/imagedrcert';
+                break;
+            case "patient_mr_file"://病人病历--医生端
+                $actionUrl = 'api/imagepatientmr';
+                break;
+
+            case "booking_file"://病人病历 --病人端
+                $actionUrl = 'api/imagebookingmr';
+                break;
+        }
         foreach ($models as $model) {
             $this->files[] = $this->uploadMgr->getAbsFileUrl($model, $actionUrl);
         }

@@ -46,11 +46,13 @@ return array(
         'ext.mail.YiiMailMessage',
         'application.extensions.EValidators.*',
         'application.modules.translate.TranslateModule',
-        'application.modules.fileUploadModel.FileuploadModule',
+        'application.modules.fileupload.models.*',
+        'application.modules.fileupload.models.base.*',
+        'application.modules.fileupload.models.file.*',
         'application.extensions.yiidebugtb.*',
     ),
     'modules' => array(
-        'fileUploadModel',
+        'fileupload',
         'translate', //manages translation message.
         'weixinpub',
         /** user module * */
@@ -135,12 +137,11 @@ return array(
             'showScriptName' => false,
             'rules' => array(
                 // api url.                
-                array('api/list', 'pattern' => 'api/<model:\w+>', 'verb' => 'GET'),                
+                array('api/list', 'pattern' => 'api/<model:\w+>', 'verb' => 'GET'),
                 array('api/view', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'GET'),
                 array('api/update', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'PUT'),
                 array('api/delete', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'DELETE'),
                 array('api/create', 'pattern' => 'api/<model:\w+>', 'verb' => 'POST'),
-
                 '<controller:\w+>/<action:index>' => '<controller>/index',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -148,15 +149,14 @@ return array(
             ),
         ),
         // myzd-test.        
-          'db' => array(
-          'connectionString' => 'mysql:host=qpmyzdstaging91466636.mysql.rds.aliyuncs.com;dbname=myzd-test',
-          'emulatePrepare' => true,
-          'username' => 'supertestuser',
-          'password' => 'Qp91466636',
-          'charset' => 'utf8',
-          'schemaCachingDuration' => 3600    // 开启表结构缓存（schema caching）提高性能
-          ),
-
+        'db' => array(
+            'connectionString' => 'mysql:host=qpmyzdstaging91466636.mysql.rds.aliyuncs.com;dbname=myzd-test',
+            'emulatePrepare' => true,
+            'username' => 'supertestuser',
+            'password' => 'Qp91466636',
+            'charset' => 'utf8',
+            'schemaCachingDuration' => 3600    // 开启表结构缓存（schema caching）提高性能
+        ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'home/error',
@@ -211,8 +211,8 @@ return array(
     ),
     // application-level parameters that can be accessed
     // using Yii::app()->params['paramName']
-    'params' => array(     
+    'params' => array(
         'mrFilePath' => 'upload/mr',
-        "doctorCertFilePath" => "upload/doctorcert",               
-    ),   
+        "doctorCertFilePath" => "upload/doctorcert",
+    ),
 );
