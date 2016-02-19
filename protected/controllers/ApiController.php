@@ -26,9 +26,8 @@ class ApiController extends Controller {
 
     public function domainWhiteList() {
         return array(
-            'http://192.168.31.169',
-            'http://192.168.31.118',
             'http://md.mingyizd.com',
+            'http://m.mingyizzhudao.com',
         );
     }
 
