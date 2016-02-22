@@ -33,7 +33,7 @@ class FileManager {
                 $models = UserDoctorCert::model()->getDoctorFilesByUserId($userId);
                 break;
             case "patient_mr_file"://病人病历--医生端
-                $patientId = $values['patientId'];
+                $patientId = $values['patient'];
                 $creatorId = $values['userId'];
                 $reportType = $values['reportType'];
                 $models = PatientMRFile::model()->getFilesOfPatientByPatientIdAndCreaterIdAndType($patientId, $creatorId, $reportType);
@@ -45,6 +45,16 @@ class FileManager {
                     $models = BookingFile::model()->getAllByBookingIdAndUserId($bookingId, $userId);
                 } else {
                     $models = BookingFile::model()->getAllByBookingId($bookingId);
+                }
+                break;
+            case "patient_booking"://收到的预约
+                $pbId = $values['pbId'];
+                $dotorId = $values['userId'];
+                $reportType = $values['reportType'];
+                $pb = PatientBooking::model()->getByIdAndDoctorId($pbId, $dotorId);
+                if (isset($pb)) {
+                    $patientId = $pb->patient_id;
+                    $models = PatientMRFile::model()->getAllByAttributes(array('patient_id' => $patientId, 'report_type' => $reportType));
                 }
                 break;
         }

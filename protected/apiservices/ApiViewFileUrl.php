@@ -48,7 +48,9 @@ class ApiViewFileUrl extends EApiViewService {
             case "patient_mr_file"://病人病历--医生端
                 $actionUrl = 'api/imagepatientmr';
                 break;
-
+            case "patient_booking"://收到的病历
+                $actionUrl = 'api/imagepatientmr';
+                break;
             case "booking_file"://病人病历 --病人端
                 $actionUrl = 'api/imagebookingmr';
                 break;

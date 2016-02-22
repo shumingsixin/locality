@@ -10,6 +10,7 @@ class ApiController extends Controller {
     const TYPE_DOCTOR = 'user_doctor_cert';
     const TYPE_PATIENT = 'patient_mr_file';
     const TYPE_BOOKING = 'booking_file';
+    const TYPE_PB = 'patient_booking';
 
     /**
      * Default response format
@@ -27,7 +28,7 @@ class ApiController extends Controller {
     public function domainWhiteList() {
         return array(
             'http://md.mingyizd.com',
-            'http://m.mingyizzhudao.com',
+            'http://m.mingyizd.com',
         );
     }
 
@@ -69,6 +70,16 @@ class ApiController extends Controller {
             case 'loadpatientmr'://获取病人病历文件链接
                 $values = $_GET;
                 $values['tableName'] = self::TYPE_PATIENT;
+                if (isset($values['userId']) === false) {
+                    $user = $this->userLoginRequired($values);
+                    $values['userId'] = $user->getId();
+                }
+                $apiService = new ApiViewFileUrl($values);
+                $output = $apiService->loadApiViewData();
+                break;
+            case 'loadpatientbookingmr'://收到预约
+                $values = $_GET;
+                $values['tableName'] = self::TYPE_PB;
                 if (isset($values['userId']) === false) {
                     $user = $this->userLoginRequired($values);
                     $values['userId'] = $user->getId();
