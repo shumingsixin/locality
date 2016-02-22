@@ -33,7 +33,7 @@ class FileManager {
                 $models = UserDoctorCert::model()->getDoctorFilesByUserId($userId);
                 break;
             case "patient_mr_file"://病人病历--医生端
-                $patientId = $values['patient'];
+                $patientId = $values['patientId'];
                 $creatorId = $values['userId'];
                 $reportType = $values['reportType'];
                 $models = PatientMRFile::model()->getFilesOfPatientByPatientIdAndCreaterIdAndType($patientId, $creatorId, $reportType);
