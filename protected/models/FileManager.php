@@ -85,6 +85,12 @@ class FileManager {
         return $url;
     }
 
+    public function RemoteTask() {
+        $this->filesUploadQiniu('user_doctor_cert');
+        $this->filesUploadQiniu('patient_mr_file');
+        $this->filesUploadQiniu('booking_file');
+    }
+
     //定时任务 文件上传至七牛
     public function filesUploadQiniu($tableName) {
         $models = array();

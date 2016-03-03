@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__) . '/../sdk/vendor/autoload.php';
 require_once dirname(__FILE__) . '/../sdk/vendor/config.php';
+
 // 引入鉴权类
 use Qiniu\Auth;
 //引入上传类
@@ -24,7 +25,7 @@ class ApiServiceFileUploadQiniu {
         $fileDbCount = count($files);
         $fileQnCount = 0;
         //在循环之外定义时间 文件存储时间
-        $endTime = time() + 3 * 60;
+        $endTime = time() + 5 * 60 - 30;
         if (arrayNotEmpty($files)) {
             foreach ($files as $v) {
                 //循环开始 时间判断 

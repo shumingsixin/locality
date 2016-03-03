@@ -339,6 +339,22 @@ class Doctor extends EActiveRecord {
         return $this->findAll($criteria);
     }
 
+    /**
+     * 获取未上传至七牛的医生头像
+     * @param type $baseUrl
+     * @param type $rownum
+     * @return type
+     */
+    public function getAllNotInQiniu($baseUrl, $rownum = 50) {
+        $criteria = new CDbCriteria;
+        $criteria->select = 't.*';
+        $criteria->distinct = FALSE;
+        $criteria->addCondition("t.base_url != :baseUrl");
+        $criteria->params[":baseUrl"] = $baseUrl;
+        $criteria->limit = $rownum;
+        return $this->findAll($criteria);
+    }
+
     /*     * ****** Display Methods ******* */
 
     public function getAbsUrlAvatar($thumbnail = false) {

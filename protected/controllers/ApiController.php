@@ -27,8 +27,9 @@ class ApiController extends Controller {
 
     public function domainWhiteList() {
         return array(
-            'http://md.mingyizd.com',
+            'http://md.mingyizhudao.com',
             'http://m.mingyizd.com',
+			'http://192.168.31.142 ',
         );
     }
 
@@ -124,17 +125,21 @@ class ApiController extends Controller {
                 $this->renderImageOutput($url);
                 exit();
                 break;
-            case 'qiniudrcert'://定时任务调用接口上传
+			case 'taskremote':
+                $fileMgr = new FileManager();
+                $fileMgr->RemoteTask();
+                break;
+            case 'taskdrcert'://定时任务调用接口上传
                 $tableName = self::TYPE_DOCTOR;
                 $fileMgr = new FileManager();
                 $fileMgr->filesUploadQiniu($tableName);
                 break;
-            case 'qiniupatientmr'://定时任务调用接口
+            case 'taskpatientmr'://定时任务调用接口
                 $tableName = self::TYPE_PATIENT;
                 $fileMgr = new FileManager();
                 $fileMgr->filesUploadQiniu($tableName);
                 break;
-            case 'qiniubooking'://定时任务调用接口
+            case 'taskbooking'://定时任务调用接口
                 $tableName = self::TYPE_BOOKING;
                 $fileMgr = new FileManager();
                 $fileMgr->filesUploadQiniu($tableName);
