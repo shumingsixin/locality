@@ -11,6 +11,7 @@ class ApiController extends Controller {
     const TYPE_PATIENT = 'patient_mr_file';
     const TYPE_BOOKING = 'booking_file';
     const TYPE_PB = 'patient_booking';
+    const TYPE_AVATAR = 'doctor';
 
     /**
      * Default response format
@@ -30,6 +31,7 @@ class ApiController extends Controller {
             'http://md.mingyizhudao.com',
             'http://m.mingyizd.com',
             'http://192.168.31.142 ',
+            'http://192.168.31.246 ',
         );
     }
 
@@ -65,6 +67,12 @@ class ApiController extends Controller {
                 $tableName = self::TYPE_BOOKING;
                 $apiService = new ApiViewUploadToken($tableName);
                 $output = $apiService->loadApiViewData();
+                break;
+            case 'tokendravatar':
+                $tableName = self::TYPE_AVATAR;
+                $fileMgr = new FileUploadManager();
+                $data = $fileMgr->getUploadToken($tableName);
+                $output = array('uptoken' => $data->uploadToken);
                 break;
             case 'loaddrcert'://获取医生证明文件链接 
                 $values = $_GET;

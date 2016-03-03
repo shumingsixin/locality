@@ -1,19 +1,15 @@
 <?php
+
 namespace Qiniu\Storage;
 
 use Qiniu\Config;
 use Qiniu\Http\Client;
 use Qiniu\Http\Error;
 
-final class FormUploader
-{
+final class FormUploader {
+
     public static function put(
-        $upToken,
-        $key,
-        $data,
-        $params,
-        $mime,
-        $checkCrc
+    $upToken, $key, $data, $params, $mime, $checkCrc
     ) {
         $fields = array('token' => $upToken);
         if ($key === null) {
@@ -39,12 +35,7 @@ final class FormUploader
     }
 
     public static function putFile(
-        $upToken,
-        $key,
-        $filePath,
-        $params,
-        $mime,
-        $checkCrc
+    $upToken, $key, $filePath, $params, $mime, $checkCrc
     ) {
 
         $fields = array('token' => $upToken, 'file' => self::createFile($filePath, $mime));
@@ -62,7 +53,7 @@ final class FormUploader
                 $fields[$k] = $v;
             }
         }
-        $headers =array('Content-Type' => 'multipart/form-data');
+        $headers = array('Content-Type' => 'multipart/form-data');
         $response = client::post(Config::$defaultHost, $fields, $headers);
         if (!$response->ok()) {
             return array(null, new Error(Config::$defaultHost, $response));
@@ -70,8 +61,7 @@ final class FormUploader
         return array($response->json(), null);
     }
 
-    private static function createFile($filename, $mime)
-    {
+    private static function createFile($filename, $mime) {
         // PHP 5.5 introduced a CurlFile object that deprecates the old @filename syntax
         // See: https://wiki.php.net/rfc/curl-file-upload
         if (function_exists('curl_file_create')) {
@@ -86,4 +76,5 @@ final class FormUploader
 
         return $value;
     }
+
 }

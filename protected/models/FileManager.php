@@ -146,7 +146,7 @@ class FileManager {
     }
 
     public function updateAvatar() {
-        $ids = array("10", "24", "28", "30", "31", "35", "38", "54", "63", "100", "102", "103", "113", "114", "348");
+        $ids = array("10", "24", "28", "30", "31", "35", "38", "54", "63", "100", "102", "103", "113", "114");
         $qiniuUrl = 'http://7xrgsh.com2.z0.glb.qiniucdn.com/';
         $data = array();
         $models = Doctor::model()->getAll();
