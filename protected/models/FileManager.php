@@ -146,12 +146,16 @@ class FileManager {
     }
 
     public function updateAvatar() {
-        $qiniuUrl = 'http://7xpwmj.com2.z0.glb.qiniucdn.com/';
+        $ids = array("10", "24", "28", "30", "31", "35", "38", "54", "63", "100", "102", "103", "113", "114", "348");
+        $qiniuUrl = 'http://7xrgsh.com2.z0.glb.qiniucdn.com/';
         $data = array();
         $models = Doctor::model()->getAll();
         foreach ($models as $model) {
             if (strIsEmpty($model->avatar_url)) {
                 continue;
+            }
+            if (in_array($model->id, $ids)) {
+                 continue;
             }
             $filePath = $model->getAbsUrlAvatar();
             $url = $qiniuUrl . substr($filePath, strrpos($filePath, '/') + 1);
