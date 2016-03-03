@@ -29,7 +29,7 @@ class ApiController extends Controller {
         return array(
             'http://md.mingyizhudao.com',
             'http://m.mingyizd.com',
-			'http://192.168.31.142 ',
+            'http://192.168.31.142 ',
         );
     }
 
@@ -43,6 +43,10 @@ class ApiController extends Controller {
     // Actions
     public function actionList($model) {
         switch ($model) {
+            case 'doctoravatar'://检测医生头像链接是否正确
+                $fileMgr = new FileManager();
+                $output = $fileMgr->loadNotAvatar();
+                break;
             case 'tokendrcert'://获取医生证明上传权限
                 $tableName = self::TYPE_DOCTOR;
                 $apiService = new ApiViewUploadToken($tableName);
@@ -125,7 +129,7 @@ class ApiController extends Controller {
                 $this->renderImageOutput($url);
                 exit();
                 break;
-			case 'taskremote':
+            case 'taskremote':
                 $fileMgr = new FileManager();
                 $fileMgr->RemoteTask();
                 break;

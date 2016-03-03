@@ -128,4 +128,21 @@ class FileManager {
         return $output;
     }
 
+    public function loadNotAvatar() {
+        $data = array();
+        $models = Doctor::model()->getAll();
+        foreach ($models as $model) {
+            if (strIsEmpty($model->avatar_url)) {
+                $data[] = $model->id;
+                continue;
+            }
+            $fileUrl = $model->getAbsUrlAvatar();
+            $fileData = @file_get_contents($fileUrl);
+            if (strlen($fileData) <= 0) {
+                $data[] = $model->id;
+            }
+        }
+        return $data;
+    }
+
 }
