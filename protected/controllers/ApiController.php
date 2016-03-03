@@ -43,6 +43,10 @@ class ApiController extends Controller {
     // Actions
     public function actionList($model) {
         switch ($model) {
+            case 'updateavatar':
+                $fileMgr = new FileManager();
+                $output = $fileMgr->updateAvatar();
+                break;
             case 'doctoravatar'://检测医生头像链接是否正确
                 $fileMgr = new FileManager();
                 $output = $fileMgr->loadNotAvatar();

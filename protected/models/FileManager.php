@@ -133,7 +133,7 @@ class FileManager {
         $models = Doctor::model()->getAll();
         foreach ($models as $model) {
             if (strIsEmpty($model->avatar_url)) {
-                $data[] = $model->id;
+                //$data[] = $model->id;
                 continue;
             }
             $fileUrl = $model->getAbsUrlAvatar();
@@ -141,6 +141,23 @@ class FileManager {
             if (strlen($fileData) <= 0) {
                 $data[] = $model->id;
             }
+        }
+        return $data;
+    }
+
+    public function updateAvatar() {
+        $qiniuUrl = 'http://7xpwmj.com2.z0.glb.qiniucdn.com/';
+        $data = array();
+        $models = Doctor::model()->getAll();
+        foreach ($models as $model) {
+            if (strIsEmpty($model->avatar_url)) {
+                continue;
+            }
+            $filePath = $model->getAbsUrlAvatar();
+            $url = $qiniuUrl . substr($filePath, strrpos($filePath, '/') + 1);
+            $model->avatar_url = $url;
+            $model->update(array('avatar_url'));
+            $data[] = $model->id;
         }
         return $data;
     }
