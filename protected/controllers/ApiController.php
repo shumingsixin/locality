@@ -12,6 +12,7 @@ class ApiController extends Controller {
     const TYPE_BOOKING = 'booking_file';
     const TYPE_PB = 'patient_booking';
     const TYPE_AVATAR = 'doctor';
+    const TYPE_ADMIN = 'admin_booking';
 
     /**
      * Default response format
@@ -29,9 +30,10 @@ class ApiController extends Controller {
     public function domainWhiteList() {
         return array(
             'http://md.mingyizhudao.com',
-            'http://m.mingyizd.com',
-            'http://192.168.31.142 ',
-            'http://192.168.31.246 ',
+            'http://admin.mingyizd.com',
+            'http://m.mingyizhudao.com',
+            'http://mingyizhudao.com',
+            'http://api.mingyizhudao.com',
         );
     }
 
@@ -68,10 +70,15 @@ class ApiController extends Controller {
                 $apiService = new ApiViewUploadToken($tableName);
                 $output = $apiService->loadApiViewData();
                 break;
-            case 'tokendravatar':
-                $tableName = self::TYPE_AVATAR;
+//            case 'tokendravatar':
+//                $tableName = self::TYPE_AVATAR;
+//                $fileMgr = new FileUploadManager();
+//                $data = $fileMgr->getUploadToken($tableName);
+//                $output = array('uptoken' => $data->uploadToken);
+//                break;
+            case 'tokentest':
                 $fileMgr = new FileUploadManager();
-                $data = $fileMgr->getUploadToken($tableName);
+                $data = $fileMgr->getUploadToken('test');
                 $output = array('uptoken' => $data->uploadToken);
                 break;
             case 'loaddrcert'://获取医生证明文件链接 
@@ -114,6 +121,12 @@ class ApiController extends Controller {
                 $apiService = new ApiViewFileUrl($values);
                 $output = $apiService->loadApiViewData();
                 break;
+            case 'loadadminmr'://获取adminbooking的链接
+                $values = $_GET;
+                $values['tableName'] = self::TYPE_ADMIN;
+                $apiService = new ApiViewFileUrl($values);
+                $output = $apiService->loadApiViewData();
+                break;
             case 'imagedrcert'://加载医生证明
                 $tableName = self::TYPE_DOCTOR;
                 $uid = $_GET['uid'];
@@ -134,6 +147,15 @@ class ApiController extends Controller {
                 break;
             case 'imagebookingmr'://加载预约病历
                 $tableName = self::TYPE_BOOKING;
+                $uid = $_GET['uid'];
+                $type = $_GET['type'];
+                $fileMgr = new FileManager();
+                $url = $fileMgr->getFileUrl($tableName, $uid, $type);
+                $this->renderImageOutput($url);
+                exit();
+                break;
+            case 'imageadminmr':
+                $tableName = self::TYPE_ADMIN;
                 $uid = $_GET['uid'];
                 $type = $_GET['type'];
                 $fileMgr = new FileManager();
@@ -208,13 +230,6 @@ class ApiController extends Controller {
             // application/x-www-form-urlencoded
             $post = $_POST;
         }
-        $api = $this->getApiVersionFromRequest();
-        if ($api >= 4) {
-            $output = array('status' => EApiViewService::RESPONSE_NO, 'errorCode' => ErrorList::BAD_REQUEST, 'errorMsg' => 'Invalid request.');
-        } else {
-            $output = array('status' => false, 'error' => 'Invalid request.');
-        }
-
         // var_dump($get);var_dump($post);exit;
         switch ($get['model']) {
             // Get an instance of the respective model
@@ -222,8 +237,10 @@ class ApiController extends Controller {
             case 'savedrcert'://保存app上传七牛的各类文件数据
                 $appFile = $_POST['appFile'];
                 $appFile['tableName'] = self::TYPE_DOCTOR;
-                $user = $this->userLoginRequired($appFile);
-                $appFile['userId'] = $user->getId();
+                if (isset($appFile['userId']) === false) {
+                    $user = $this->userLoginRequired($appFile);
+                    $appFile['userId'] = $user->getId();
+                }
                 $apiService = new ApiViewSaveAppFile($appFile);
                 $output = $apiService->loadApiViewData();
                 break;

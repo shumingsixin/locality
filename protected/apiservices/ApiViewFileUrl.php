@@ -54,6 +54,9 @@ class ApiViewFileUrl extends EApiViewService {
             case "booking_file"://病人病历 --病人端
                 $actionUrl = 'api/imagebookingmr';
                 break;
+            case "admin_booking"://adminbooking
+                $actionUrl = 'api/imageadminmr';
+                break;
         }
         foreach ($models as $model) {
             $this->files[] = $this->uploadMgr->getAbsFileUrl($model, $actionUrl);

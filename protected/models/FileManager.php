@@ -57,6 +57,11 @@ class FileManager {
                     $models = PatientMRFile::model()->getAllByAttributes(array('patient_id' => $patientId, 'report_type' => $reportType));
                 }
                 break;
+            case 'admin_booking':
+                $abId = $values['abId'];
+                $reportType = $values['reportType'];
+                $models = AdminBookingFile::model()->getAllByAttributes(array('admin_booking_id' => $abId, 'report_type' => $reportType));
+                break;
         }
         return $models;
     }
@@ -73,6 +78,9 @@ class FileManager {
                 break;
             case "booking_file"://病人病历 --病人端
                 $model = BookingFile::model()->getByUID($uid);
+                break;
+            case "admin_booking"://admin_booking
+                $model = AdminBookingFile::model()->getByUID($uid);
                 break;
         }
         $url = '';
@@ -155,7 +163,7 @@ class FileManager {
                 continue;
             }
             if (in_array($model->id, $ids)) {
-                 continue;
+                continue;
             }
             $filePath = $model->getAbsUrlAvatar();
             $url = $qiniuUrl . substr($filePath, strrpos($filePath, '/') + 1);

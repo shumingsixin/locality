@@ -143,6 +143,7 @@ class FileUploadManager {
         $data->thumbnailUrl = $thumbnailUrl;
         $data->uid = $fileUploadModel->getUID();
         $data->id = $fileUploadModel->getId();
+        $data->dateCreated = $fileUploadModel->getDateCreated();
         return $data;
     }
 
