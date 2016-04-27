@@ -34,6 +34,8 @@ class ApiController extends Controller {
             'http://m.mingyizhudao.com',
             'http://mingyizhudao.com',
             'http://api.mingyizhudao.com',
+            'http://192.168.31.108',
+            'http://192.168.31.119',
         );
     }
 
@@ -70,12 +72,12 @@ class ApiController extends Controller {
                 $apiService = new ApiViewUploadToken($tableName);
                 $output = $apiService->loadApiViewData();
                 break;
-//            case 'tokendravatar':
-//                $tableName = self::TYPE_AVATAR;
-//                $fileMgr = new FileUploadManager();
-//                $data = $fileMgr->getUploadToken($tableName);
-//                $output = array('uptoken' => $data->uploadToken);
-//                break;
+            case 'tokendravatar':
+                $tableName = self::TYPE_AVATAR;
+                $fileMgr = new FileUploadManager();
+                $data = $fileMgr->getUploadToken($tableName);
+                $output = array('uptoken' => $data->uploadToken);
+                break;
             case 'tokentest':
                 $fileMgr = new FileUploadManager();
                 $data = $fileMgr->getUploadToken('test');
@@ -181,6 +183,11 @@ class ApiController extends Controller {
                 $tableName = self::TYPE_BOOKING;
                 $fileMgr = new FileManager();
                 $fileMgr->filesUploadQiniu($tableName);
+                break;
+            case 'taskavatar'://上传至七牛
+                $tableName = self::TYPE_AVATAR;
+                $uploadMgr = new FileUploadManager();
+                $uploadMgr->uploadDoctorAvatar($tableName);
                 break;
             case 'deletedrcert'://删除医生证明
                 $values = $_GET;

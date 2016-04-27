@@ -20,7 +20,7 @@ class Config {
     public static function getDomainByBucket($bucket) {
         $domains = array('medical-record' => 'http://7xq93p.com2.z0.glb.qiniucdn.com',
             'doctor-cert' => 'http://7xq939.com2.z0.glb.qiniucdn.com',
-            'doctor' => 'http://7xrgsh.com2.z0.glb.qiniucdn.com',
+            'doctor' => 'http://7xtetc.com1.z0.glb.clouddn.com',
             'test' => 'http://7xrh6w.com2.z0.glb.qiniucdn.com');
         return $domains[$bucket];
     }

@@ -345,12 +345,12 @@ class Doctor extends EActiveRecord {
      * @param type $rownum
      * @return type
      */
-    public function getAllNotInQiniu($baseUrl, $rownum = 50) {
+    public function getAllNotInQiniu($rownum = 100) {
         $criteria = new CDbCriteria;
         $criteria->select = 't.*';
-        $criteria->distinct = FALSE;
-        $criteria->addCondition("t.base_url != :baseUrl");
-        $criteria->params[":baseUrl"] = $baseUrl;
+        $criteria->compare('t.has_remote', 0);
+        $criteria->addCondition('t.date_deleted is null');
+        $criteria->addCondition('t.avatar_url is not null');
         $criteria->limit = $rownum;
         return $this->findAll($criteria);
     }
@@ -358,6 +358,9 @@ class Doctor extends EActiveRecord {
     /*     * ****** Display Methods ******* */
 
     public function getAbsUrlAvatar($thumbnail = false) {
+        if ($this->has_remote == 1) {
+            return $this->remote_domain . $this->remote_file_key;
+        }
         if (isset($this->avatar_url) && $this->avatar_url != '') {
             $url = $this->avatar_url;
             if (strStartsWith($url, 'http')) {

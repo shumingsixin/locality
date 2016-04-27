@@ -90,7 +90,7 @@ class FileUploadManager {
                         $v->setHasRemote(FileUploadModel::HAS_REMOTE);
                         $v->setRemoteFileKey($key);
                         //上传成功 数据更新
-                        $v->update();
+                        $v->update(array('has_remote', 'remote_domain', 'remote_file_key'));
                         $fileQnCount++;
                     } else {
                         $response = $err->getResponse();
@@ -156,7 +156,7 @@ class FileUploadManager {
         $remoteDomain = Config::getDomainByBucket($bucket);
         // 要上传的空间
         $auth = new Auth($this->accessKey, $this->secretKey);
-        $files = Doctor::model()->getAllNotInQiniu($remoteDomain);
+        $files = Doctor::model()->getAllNotInQiniu(500);
         //查询为存于云盘的文件
         $fileDbCount = count($files);
         $fileQnCount = 0;
@@ -171,13 +171,12 @@ class FileUploadManager {
                 }
                 // 生成上传 Token
                 $token = $auth->uploadToken($bucket);
-                $key = $v->getFileName();
+                $key = strRandomLong(32);
                 //获取文件本地地址
-                $filePath = $v->getAbsFileUrl();
+                $filePath = $v->getAbsUrlAvatar();
                 if (strIsEmpty($filePath)) {
                     continue;
                 }
-
                 // 初始化 UploadManager 对象并进行文件的上传。
                 $uploadMgr = new UploadManager();
                 try {
@@ -188,10 +187,11 @@ class FileUploadManager {
                     //文件上传云盘
                     list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
                     if ($err == null) {
-                        $v->base_url = $remoteDomain;
-                        $v->avatar_url = $key;
+                        $v->remote_domain = $remoteDomain . '/';
+                        $v->remote_file_key = $key;
+                        $v->has_remote = 1;
                         //上传成功 数据更新
-                        $v->update();
+                        $v->update(array('has_remote', 'remote_domain', 'remote_file_key'));
                         $fileQnCount++;
                     } else {
                         $response = $err->getResponse();
@@ -210,7 +210,7 @@ class FileUploadManager {
                     $filelog = new FileuploadLog();
                     $filelog->createModel($fileArr);
                 } catch (Exception $ex) {
-                    $fileArr = array('tableName' => $tableName, 'rowId' => $v->getId(), 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__ . $cex->getCode(), 'subject' => '文件上传七牛', 'message' => $ex->getMessage());
+                    $fileArr = array('tableName' => $tableName, 'rowId' => $v->getId(), 'level' => CLogger::LEVEL_ERROR, 'category' => __METHOD__ . $ex->getCode(), 'subject' => '文件上传七牛', 'message' => $ex->getMessage());
                     $filelog = new FileuploadLog();
                     $filelog->createModel($fileArr);
                 }
