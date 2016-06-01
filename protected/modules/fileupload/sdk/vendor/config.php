@@ -11,17 +11,21 @@ class Config {
         $buckets = array('user_doctor_cert' => 'doctor-cert',
             'booking_file' => 'medical-record',
             'patient_mr_file' => 'medical-record',
-            'doctor' => 'doctor', 'test' => 'test', "admin_booking" => "medical-record"
+            'doctor' => 'doctor',
+            'test' => 'test',
+            'admin_booking" => "medical-record',
+            'hospital' => 'hospital',
         );
         return $buckets[$tableName];
     }
 
     //根据空间名获取空间链接
     public static function getDomainByBucket($bucket) {
-        $domains = array('medical-record' => 'http://7xq93p.com2.z0.glb.qiniucdn.com',
-            'doctor-cert' => 'http://7xq939.com2.z0.glb.qiniucdn.com',
-            'doctor' => 'http://7xtetc.com1.z0.glb.clouddn.com',
-            'test' => 'http://7xrh6w.com2.z0.glb.qiniucdn.com');
+        $domains = array('medical-record' => 'http://mr.file.mingyizhudao.com', //http://7xq93p.com2.z0.glb.qiniucdn.com
+            'doctor-cert' => 'http://drcert.file.mingyizhudao.com', //http://7xq939.com2.z0.glb.qiniucdn.com
+            'doctor' => 'http://dr.static.mingyizhudao.com', //http://7xtetc.com1.z0.glb.clouddn.com
+            'test' => 'http://7xrh6w.com2.z0.glb.qiniucdn.com',
+            'hospital' => 'http://hp.static.mingyizhudao.com',);//http://7xti4c.com1.z0.glb.clouddn.com
         return $domains[$bucket];
     }
 
